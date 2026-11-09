@@ -1,0 +1,277 @@
+@theme {
+  --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --color-ink: #0f1729;
+  --color-ink-soft: #475069;
+  --color-ink-faint: #6b7489;
+  --color-line: #dde2ec;
+  --color-line-strong: #bcc4d4;
+  --color-canvas: #f6f8fc;
+
+  --color-x-cyan: #3ee4f2;
+  --color-x-sky: #22b8e6;
+  --color-x-azure: #3b82f6;
+  --color-x-blue: #2563eb;
+  --color-x-violet: #7c3aed;
+  --color-x-deep: #6424d6;
+
+  --color-danger: #b42318;
+  --color-danger-line: #d92d20;
+  --color-danger-bg: #fef3f2;
+  --color-warn: #b54708;
+  --color-success: #067647;
+  --color-success-bg: #ecfdf3;
+  --color-success-line: #abefc6;
+
+  --shadow-card: 0 1px 2px rgb(15 23 41 / 0.04), 0 12px 40px -12px rgb(37 99 235 / 0.18);
+}
+
+:root {
+  color-scheme: light;
+  /* Deeper than the raw mark so white text on it stays readable */
+  --gradient-brand: linear-gradient(115deg, #1e9ed8 0%, #2563eb 45%, #6d28d9 100%);
+  --gradient-mark: linear-gradient(180deg, #3ee4f2 0%, #3b82f6 50%, #7c3aed 100%);
+}
+
+@layer base {
+  html,
+  body {
+    min-height: 100%;
+  }
+  body {
+    background: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Shared auth UI
+------------------------------------------------------------------ */
+@layer components {
+  /* Card */
+  .auth-card {
+    position: relative;
+    border: 1px solid rgb(221 226 236 / 0.8);
+    border-radius: 1.25rem;
+    background: #fff;
+    padding: 1.75rem;
+    box-shadow: var(--shadow-card);
+    animation: auth-settle 0.5s 0.05s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+  .auth-card::before {
+    content: "";
+    position: absolute;
+    inset-inline: 2rem;
+    top: 0;
+    height: 2px;
+    border-radius: 999px;
+    background: var(--gradient-brand);
+    opacity: 0.8;
+  }
+  @media (min-width: 640px) {
+    .auth-card { padding: 2.25rem; }
+  }
+
+  .auth-title {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--color-ink);
+  }
+  .auth-lead {
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+  }
+  .auth-lead strong { font-weight: 600; color: var(--color-ink); overflow-wrap: anywhere; }
+
+  /* Icon badge above titles */
+  .icon-badge {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 1rem;
+    color: var(--color-x-blue);
+    background: linear-gradient(135deg, rgb(62 228 242 / 0.2), rgb(124 58 237 / 0.2));
+  }
+  .icon-badge--lg { width: 3.5rem; height: 3.5rem; }
+  .icon-badge--success { border-radius: 999px; color: #fff; background: var(--gradient-brand); }
+  .icon-badge--danger { color: var(--color-danger); background: var(--color-danger-bg); }
+  .icon-badge--pop { animation: auth-pop 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+
+  /* Form fields */
+  .field-label {
+    display: block;
+    margin-bottom: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+  .field {
+    width: 100%;
+    height: 3rem;
+    padding-inline: 1rem;
+    border: 1px solid var(--color-line);
+    border-radius: 0.75rem;
+    background: rgb(246 248 252 / 0.6);
+    font-size: 0.95rem;
+    color: var(--color-ink);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+  }
+  .field::placeholder { color: rgb(107 116 137 / 0.7); }
+  .field:hover { border-color: var(--color-line-strong); }
+  .field:focus {
+    outline: none;
+    border-color: var(--color-x-blue);
+    background: #fff;
+    box-shadow: 0 0 0 4px rgb(59 130 246 / 0.18);
+  }
+  .field[aria-invalid="true"] { border-color: var(--color-danger-line); }
+  .field[aria-invalid="true"]:focus { box-shadow: 0 0 0 4px rgb(217 45 32 / 0.14); }
+  .field--with-action { padding-right: 3rem; }
+
+  .field-action {
+    position: absolute;
+    right: 0.375rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 0.5rem;
+    color: var(--color-ink-faint);
+    cursor: pointer;
+  }
+  .field-action:hover { color: var(--color-ink); background: var(--color-canvas); }
+  .field-action:focus-visible { outline: none; box-shadow: 0 0 0 2px rgb(59 130 246 / 0.4); }
+
+  .field-error,
+  .field-warn,
+  .field-ok {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    margin-top: 0.375rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+  .field-error { color: var(--color-danger); }
+  .field-warn { color: var(--color-warn); }
+  .field-ok { color: var(--color-success); }
+
+  .check {
+    width: 1.1rem;
+    height: 1.1rem;
+    flex-shrink: 0;
+    border-radius: 5px;
+    accent-color: var(--color-x-blue);
+    cursor: pointer;
+  }
+
+  /* Buttons */
+  .btn-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    height: 3rem;
+    border-radius: 0.75rem;
+    background: var(--gradient-brand);
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.12s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  }
+  .btn-primary:hover:not(:disabled) { filter: brightness(1.06); box-shadow: 0 10px 24px -10px rgb(99 52 230 / 0.55); }
+  .btn-primary:active:not(:disabled) { transform: translateY(1px); }
+  .btn-primary:focus-visible { outline: none; box-shadow: 0 0 0 3px #fff, 0 0 0 6px var(--color-x-azure); }
+  .btn-primary:disabled { cursor: not-allowed; opacity: 0.8; }
+
+  .btn-secondary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    height: 2.75rem;
+    border: 1px solid var(--color-line);
+    border-radius: 0.75rem;
+    background: #fff;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-ink);
+    cursor: pointer;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+  }
+  .btn-secondary:hover { border-color: var(--color-line-strong); background: var(--color-canvas); }
+  .btn-secondary:focus-visible { outline: none; box-shadow: 0 0 0 4px rgb(59 130 246 / 0.25); }
+
+  .spinner { width: 1.25rem; height: 1.25rem; animation: auth-spin 0.8s linear infinite; }
+
+  /* Links */
+  .lnk {
+    border-radius: 4px;
+    font-weight: 600;
+    color: var(--color-x-blue);
+    cursor: pointer;
+  }
+  .lnk:hover { color: var(--color-x-deep); }
+  .lnk:focus-visible { outline: none; box-shadow: 0 0 0 3px rgb(59 130 246 / 0.35); }
+  .lnk:disabled { color: var(--color-ink-faint); cursor: not-allowed; }
+
+  .back-link {
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    gap: 0.375rem;
+    margin: 1.75rem auto 0;
+    font-size: 0.875rem;
+  }
+
+  /* "or" divider */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-block: 1.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-ink-faint);
+  }
+  .divider::before,
+  .divider::after { content: ""; flex: 1; height: 1px; background: var(--color-line); }
+
+  /* Inline alerts */
+  .alert {
+    display: flex;
+    gap: 0.5rem;
+    border: 1px solid;
+    border-radius: 0.75rem;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.45;
+  }
+  .alert--success { border-color: var(--color-success-line); background: var(--color-success-bg); color: var(--color-success); }
+  .alert--error { border-color: #fecdca; background: var(--color-danger-bg); color: var(--color-danger); }
+}
+
+@keyframes auth-settle { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes auth-pop { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: none; } }
+@keyframes auth-spin { to { transform: rotate(360deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .auth-card,
+  .icon-badge--pop { animation: none; }
+  .spinner { animation-duration: 1.6s; }
+}
