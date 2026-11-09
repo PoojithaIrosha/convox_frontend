@@ -1,0 +1,82 @@
+<div class="shell">
+  <!-- Main sidebar -->
+  <nav class="rail" aria-label="Main">
+    <a routerLink="/inbox" class="rail-logo" aria-label="Convox">
+      <svg viewBox="0 0 220 200" aria-hidden="true">
+        <defs>
+          <linearGradient id="cxRailGrad" x1="0" y1="0" x2="0" y2="200" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#3EE4F2" />
+            <stop offset=".5" stop-color="#3B82F6" />
+            <stop offset="1" stop-color="#7C3AED" />
+          </linearGradient>
+        </defs>
+        <g fill="url(#cxRailGrad)" stroke="url(#cxRailGrad)" stroke-width="6" stroke-linejoin="round">
+          <polygon points="14,40 60,40 116,98 93,121" />
+          <polygon points="112,125 135,102 203,184 157,184" />
+          <polygon points="166,8 212,8 58,188 12,188" stroke="#fff" stroke-width="16" fill="#fff" />
+          <polygon points="166,8 212,8 58,188 12,188" />
+        </g>
+      </svg>
+    </a>
+
+    <ul class="rail-nav">
+      <li>
+        <a routerLink="/inbox" routerLinkActive="is-active" class="rail-link" aria-label="Inbox">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13.5h4.5l1.5 2.5h6l1.5-2.5H21" /><path d="M5.5 5h13l2.5 8.5V19a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-5.5L5.5 5Z" /></svg>
+          <span class="rail-badge">12</span>
+          <span class="rail-tip">Inbox</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/contacts" routerLinkActive="is-active" class="rail-link" aria-label="Contacts">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5" /><path d="M2.5 20c.8-3.5 3.4-5.5 6.5-5.5s5.7 2 6.5 5.5" /><path d="M16 4.8a3.5 3.5 0 0 1 0 6.4M18.5 14.8c1.5.9 2.6 2.7 3 5.2" /></svg>
+          <span class="rail-tip">Contacts</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/broadcasts" routerLinkActive="is-active" class="rail-link" aria-label="Broadcasts">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5v3a1 1 0 0 0 1 1h2l5 4V5.5l-5 4H4a1 1 0 0 0-1 1Z" /><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13" /></svg>
+          <span class="rail-tip">Broadcasts</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/automations" routerLinkActive="is-active" class="rail-link" aria-label="Automations">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2.5 4.5 13.5H12l-1 8 8.5-11H12l1-8Z" /></svg>
+          <span class="rail-tip">Automations</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/reports" routerLinkActive="is-active" class="rail-link" aria-label="Reports">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20v-7M11 20V5M17 20V10M3 20h18" /></svg>
+          <span class="rail-tip">Reports</span>
+        </a>
+      </li>
+    </ul>
+
+    <ul class="rail-nav rail-nav--bottom">
+      <li>
+        <a routerLink="/channels" routerLinkActive="is-active" class="rail-link" aria-label="Channels">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 7V3M15 7V3M7 7h10v4a5 5 0 0 1-10 0V7ZM12 16v5" /></svg>
+          <span class="rail-tip">Channels</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/settings" routerLinkActive="is-active" class="rail-link" aria-label="Settings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7h-9M14 17H4" /><circle cx="17" cy="17" r="3" /><circle cx="7" cy="7" r="3" /></svg>
+          <span class="rail-tip">Settings</span>
+        </a>
+      </li>
+      <li>
+        <button type="button" class="rail-me" aria-label="Your profile, online">
+          PP
+          <span class="rail-tip">Your profile</span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Page area (Inbox, Contacts, …) -->
+  <main class="shell-main">
+    <router-outlet />
+  </main>
+</div>

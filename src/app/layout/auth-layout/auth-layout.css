@@ -1,0 +1,132 @@
+:host {
+  display: block;
+  min-height: 100dvh;
+  background: var(--color-canvas);
+}
+
+.auth-shell {
+  position: relative;
+  min-height: 100dvh;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* ---------- Backdrop ---------- */
+.backdrop {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+
+.glow {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(64px);
+}
+.glow--cyan {
+  top: -10rem;
+  left: -8rem;
+  width: 28rem;
+  height: 28rem;
+  background: rgb(62 228 242 / 0.2);
+}
+.glow--violet {
+  bottom: -12rem;
+  right: -6rem;
+  width: 32rem;
+  height: 32rem;
+  background: rgb(124 58 237 / 0.15);
+}
+
+.backdrop-mark {
+  position: absolute;
+  right: -10rem;
+  bottom: -6rem;
+  width: 46rem;
+  max-width: none;
+  opacity: 0.07;
+}
+@media (min-width: 640px) {
+  .backdrop-mark { right: -6rem; }
+}
+
+/* ---------- Main column ---------- */
+.auth-main {
+  position: relative;
+  display: flex;
+  min-height: 100dvh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1.25rem;
+}
+@media (min-width: 640px) {
+  .auth-main { padding-inline: 1.5rem; }
+}
+
+.auth-outlet {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* ---------- Wordmark ---------- */
+.brand {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-radius: 0.5rem;
+}
+.brand:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgb(59 130 246 / 0.3);
+}
+.brand-word {
+  font-family: var(--font-display);
+  font-size: 2.1rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+}
+.brand-x {
+  height: 2.05rem;
+  width: auto;
+  margin-left: 1px;
+}
+.gap {
+  fill: var(--color-canvas);
+  stroke: var(--color-canvas);
+  stroke-width: 16;
+}
+
+/* The mark assembles once on first load */
+.arm {
+  animation: arm-in 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.arm--long { --dx: 10px; --dy: -10px; animation-delay: 0.05s; }
+.arm--tl { --dx: -10px; --dy: -10px; animation-delay: 0.15s; }
+.arm--br { --dx: 10px; --dy: 10px; animation-delay: 0.25s; }
+
+@keyframes arm-in {
+  from { opacity: 0; transform: translate(var(--dx), var(--dy)); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ---------- Legal footer ---------- */
+.legal {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
+  color: var(--color-ink-faint);
+}
+.legal a:hover {
+  color: var(--color-ink-soft);
+  text-decoration: underline;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arm { animation: none; }
+}

@@ -1,0 +1,57 @@
+<div class="auth-shell">
+  <!-- Backdrop: soft glows + oversized X mark -->
+  <div class="backdrop" aria-hidden="true">
+    <span class="glow glow--cyan"></span>
+    <span class="glow glow--violet"></span>
+    <svg class="backdrop-mark" viewBox="0 0 220 200">
+      <defs>
+        <linearGradient id="cxBackdropGrad" x1="0" y1="0" x2="0" y2="200" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#3EE4F2" />
+          <stop offset=".5" stop-color="#3B82F6" />
+          <stop offset="1" stop-color="#7C3AED" />
+        </linearGradient>
+      </defs>
+      <g fill="url(#cxBackdropGrad)" stroke="url(#cxBackdropGrad)" stroke-width="6" stroke-linejoin="round">
+        <polygon points="14,40 60,40 116,98 93,121" />
+        <polygon points="112,125 135,102 203,184 157,184" />
+        <polygon points="166,8 212,8 58,188 12,188" />
+      </g>
+    </svg>
+  </div>
+
+  <main class="auth-main">
+    <!-- Wordmark -->
+    <a routerLink="/auth/login" class="brand" aria-label="Convox home">
+      <span class="brand-word">Convo</span>
+      <svg class="brand-x" viewBox="0 0 220 200" aria-hidden="true">
+        <defs>
+          <linearGradient id="cxBrandGrad" x1="0" y1="0" x2="0" y2="200" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#3EE4F2" />
+            <stop offset=".5" stop-color="#3B82F6" />
+            <stop offset="1" stop-color="#7C3AED" />
+          </linearGradient>
+        </defs>
+        <g fill="url(#cxBrandGrad)" stroke="url(#cxBrandGrad)" stroke-width="6" stroke-linejoin="round">
+          <polygon class="arm arm--tl" points="14,40 60,40 116,98 93,121" />
+          <polygon class="arm arm--br" points="112,125 135,102 203,184 157,184" />
+          <!-- Cut-out gap where the strokes cross -->
+          <polygon class="arm arm--long gap" points="166,8 212,8 58,188 12,188" />
+          <polygon class="arm arm--long" points="166,8 212,8 58,188 12,188" />
+        </g>
+      </svg>
+    </a>
+
+    <!-- Each auth page renders its own card here -->
+    <div class="auth-outlet">
+      <router-outlet />
+    </div>
+
+    <footer class="legal">
+      <a href="#">Terms</a>
+      <span aria-hidden="true">|</span>
+      <a href="#">Privacy</a>
+      <span aria-hidden="true">|</span>
+      <a href="#">Help</a>
+    </footer>
+  </main>
+</div>
